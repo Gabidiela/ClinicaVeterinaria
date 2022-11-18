@@ -3,17 +3,20 @@ import java.util.Date;
 public class Atendimento {
 
     // Variáveis
-    private Servico servico;
     private Animal animal;
     private String senha;
     private Date HoraEntrada;
     private Date HoraConsulta;
+    private String NomeServico;
+    private boolean TipoServico;
+
 
     // construtor
-    public Atendimento(Servico servico, Animal animal, String senha) {
-        this.servico = servico;
+    public Atendimento(Animal animal, String senha, String NomeServico, boolean TipoServico) {
         this.animal = animal;
         this.senha = senha;
+        this.NomeServico = NomeServico;
+        this.TipoServico = TipoServico;
         HoraEntrada = new Date(System.currentTimeMillis());
     }
 
@@ -24,6 +27,14 @@ public class Atendimento {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getNomeServico(){
+        return NomeServico;
+    }
+
+    public Boolean getTipoServico(){
+        return TipoServico;
     }
 
     public void setHoraConsulta(){
