@@ -4,6 +4,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
+        Animal animal;
+        Date dataNascimento = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         boolean sair = false;
 
         do {
@@ -15,6 +18,22 @@ public class Main {
 
             switch (op){
                 case 1:
+                    System.out.print("Apelido: ");
+                	String Apelido = entrada.nextLine();
+                	
+                	System.out.print("Tipo do animal: ");
+                    String tipoAnimal  = entrada.nextLine();
+                    String data = entrada.nextLine();
+                    try {
+                		dataNascimento = sdf.parse(data);
+
+                	} catch (ParseException e) {
+                		e.printStackTrace();
+                	}
+                    System.out.print("Dono: ");
+                    String dono  = entrada.nextLine();
+                    
+                    animal = new Animal(Apelido, tipoAnimal, dataNascimento, dono);
                     break;
                 case 2:
                     System.out.println("Selecione o serviço");
