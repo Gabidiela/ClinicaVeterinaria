@@ -8,15 +8,14 @@ public class Atendimento {
     private Date HoraEntrada;
     private Date HoraConsulta;
     private String NomeServico;
-    private boolean TipoServico;
+    private boolean Prioritario;
 
 
     // construtor
-    public Atendimento(Animal animal, String senha, String NomeServico, boolean TipoServico) {
+    public Atendimento(Animal animal, String NomeServico, boolean Prioritario) {
         this.animal = animal;
-        this.senha = senha;
         this.NomeServico = NomeServico;
-        this.TipoServico = TipoServico;
+        this.Prioritario = Prioritario;
         HoraEntrada = new Date(System.currentTimeMillis());
     }
 
@@ -33,8 +32,8 @@ public class Atendimento {
         return NomeServico;
     }
 
-    public Boolean getTipoServico(){
-        return TipoServico;
+    public Boolean isPrioritario(){
+        return Prioritario;
     }
 
     public void setHoraConsulta(){

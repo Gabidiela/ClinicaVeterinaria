@@ -1,3 +1,4 @@
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Fila{
@@ -6,9 +7,10 @@ public class Fila{
 
     private Queue<Atendimento> Fila;
 
-    public Fila(int numeroFila, char tipoFila) {
-        NumeroFila = numeroFila;
+    public Fila(char tipoFila) {
+        NumeroFila = 0;
         TipoFila = tipoFila;
+        Fila = new PriorityQueue<Atendimento>();
     }
     public void Inserir(Atendimento A){
         NumeroFila++;
@@ -16,8 +18,13 @@ public class Fila{
         Fila.add(A);
     }
 
-    public Atendimento Remover(){
-        return Fila.remove();
+    public Atendimento ChamarProximo(){
+        if(Fila.size()>0) {
+            Atendimento proximo = Fila.remove();
+            proximo.setHoraConsulta();
+            return proximo;
+        }
+        return null;
     }
 
     public Atendimento VerFila(){
