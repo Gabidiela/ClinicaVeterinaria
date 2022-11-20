@@ -4,18 +4,19 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class ClinicaVet {
-    private Fila FilaNormal;
-    private Fila FilaPrioritaria;
-    private List<Atendimento> Atendidos;
+    private Fila filaNormal;
+    private Fila filaPrioritaria;
+    private List<Atendimento> atendidos;
     private List<Animal> animais;
 
     public ClinicaVet() {
-        FilaNormal = new Fila('N');
-        FilaPrioritaria = new Fila('P');
-        Atendidos = new ArrayList<Atendimento>();
+        filaNormal = new Fila('N');
+        filaPrioritaria = new Fila('P');
+        atendidos = new ArrayList<Atendimento>();
+        animais = new ArrayList<Animal>();
     }
 
-    public void CadConsulta(Atendimento atendimento) {
+    public void cadConsulta(Atendimento atendimento) {
         if (atendimento.isPrioritario()) {
             FilaPrioritaria.Inserir(atendimento);
         } else {
@@ -23,28 +24,28 @@ public class ClinicaVet {
         }
     }
 
-    public Animal ChamaProximo() {
+    public Animal chamaProximo() {
         return null;
     }
 
-    public Boolean VerificaAnimal() {
+    public Boolean verificaAnimal() {
         return null;
     }
 
-    public Animal FichaProxAnimal() {
+    public Animal fichaProxAnimal() {
         return null;
     }
 
-    public void RelAnimalFila() {
+    public void relAnimalFila() {
     }
 
-    public void RelAnimalFaixa() {
+    public void relAnimalFaixa() {
     }
 
-    public void RelAnimalEspera() {
+    public void relAnimalEspera() {
     }
 
-    public void RelPermanenciaMedia() {
+    public void relPermanenciaMedia() {
     }
 
     public boolean animalJaExiste(Animal animal) {
