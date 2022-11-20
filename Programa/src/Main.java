@@ -7,7 +7,7 @@ public class Main {
   static ClinicaVet clinica;
   static Scanner entrada;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParseException {
     entrada = new Scanner(System.in);
     clinica = new ClinicaVet();
 
@@ -43,12 +43,8 @@ public class Main {
           System.out.print("Data de nascimento (dd/mm/aaaa): ");
           String data = entrada.nextLine();
 
-          Date dataNascimento = null;
-          try {
-            dataNascimento = sdf.parse(data);
-          } catch (ParseException e) {
-            e.printStackTrace();
-          }
+          Date dataNascimento = sdf.parse(data);
+     
           // -------------------------------------------------------------
 
           Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono);
@@ -67,11 +63,14 @@ public class Main {
           // --------------------------------------------------
 
           // FILA ----------------------------------------------------------------------------
+          /*
+           * Está com erro 
           if (atendimentoUrgente.equalsIgnoreCase("S")) {
             clinica.cadConsulta(new Atendimento(animal, numeroServico, true), "Prioritario");
           } else {
             clinica.cadConsulta(new Atendimento(animal, numeroServico, false), "Normal");
           }
+          */
           // ---------------------------------------------------------------------------------
 
           System.out.println("Cadastro bem sucedido!");
