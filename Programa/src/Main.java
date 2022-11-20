@@ -29,9 +29,9 @@ public class Main {
                 case 1:
                     System.out.println("Informe os dados do animal");
                     System.out.print("Apelido: ");
-                	String Apelido = entrada.nextLine();
+                    String Apelido = entrada.nextLine();
                 	
-                	System.out.print("Tipo do animal:  (canino, felino ou roedor)");
+                    System.out.print("Tipo do animal:  (canino, felino ou roedor)");
                     String tipoAnimal  = entrada.nextLine();
                     
                     System.out.print("Dono: ");
