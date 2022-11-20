@@ -97,7 +97,7 @@ public class Main {
           }
           
           break;
-        case 4:
+        /*case 4:
           System.out.println("***************************************************");
           System.out.println("* Selecione a opção desejada                      *");
           System.out.println("* 1. quantidade de animais em cada fila           *");
@@ -123,7 +123,7 @@ public class Main {
               break;
               
           }
-          break;
+          break;*/
         case 0:
           System.out.println("O programa será encerrado. Até logo!");
           sair = true;
