@@ -1,22 +1,22 @@
 import java.util.Date;
 
 public class Animal {
-    private String Apelido;
+    private String apelido;
     private String tipoAnimal;
     private Date dataNascimento;
     private String dono;
  
-     public Animal( String Apelido, String tipoAnimal,  Date dataNascimento,String dono) {
-         this.Apelido=Apelido;
-         this.tipoAnimal =tipoAnimal;
-         this.dataNascimento =dataNascimento;
+     public Animal( String apelido, String tipoAnimal, Date dataNascimento, String dono) {
+         this.Apelido = apelido;
+         this.tipoAnimal = tipoAnimal;
+         this.dataNascimento = dataNascimento;
          this.dono = dono;
      }
      public String getApelido() {
-         return Apelido;
+         return apelido;
      }
      public void setApelido(String novoApelido) {
-         Apelido = novoApelido;
+         apelido = novoApelido;
      }
      public String getTipoAnimal() {
          return tipoAnimal;
@@ -37,7 +37,7 @@ public class Animal {
          dono = novoDono;
      }
      public void dados() {
-         System.out.println("O apelido do cachorro é:" + Apelido );
+         System.out.println("O apelido do cachorro é:" + apelido );
          System.out.println("o tipo do animal é:" + tipoAnimal);
          System.out.println("a data do nascimento é:" + dataNascimento);
          System.out.println("O dono do animal é:" + dono);
