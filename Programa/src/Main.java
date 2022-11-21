@@ -41,9 +41,9 @@ public class Main {
           String dono = entrada.nextLine();
 
           System.out.print("Data de nascimento (dd/mm/aaaa): ");
-          String data = entrada.nextLine();
+          Date dataNascimento = sdf.parse(entrada.next());
 
-          Date dataNascimento = sdf.parse(data);
+         
      
           // -------------------------------------------------------------
 
@@ -64,7 +64,7 @@ public class Main {
 
           // FILA ----------------------------------------------------------------------------
           /*
-           * Está com erro 
+           * Está com erro 0
           if (atendimentoUrgente.equalsIgnoreCase("S")) {
             clinica.cadConsulta(new Atendimento(animal, numeroServico, true), "Prioritario");
           } else {
@@ -132,4 +132,6 @@ public class Main {
 
     entrada.close();
   }
-}
+ 
+  }
+
