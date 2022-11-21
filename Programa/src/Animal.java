@@ -5,12 +5,18 @@ public class Animal {
     private String tipoAnimal;
     private Date dataNascimento;
     private String dono;
+    private int numeroServico;
+    private char atendimentoUrgente;
+    
  
-     public Animal( String apelido, String tipoAnimal, Date dataNascimento, String dono) {
+     public Animal( String apelido, String tipoAnimal, Date dataNascimento, String dono, 
+    		 int numeroServico,char atendimentoUrgente) {
          this.apelido = apelido;
          this.tipoAnimal = tipoAnimal;
          this.dataNascimento = dataNascimento;
          this.dono = dono;
+         this.numeroServico = numeroServico;
+         this.atendimentoUrgente = atendimentoUrgente;
      }
      public String getApelido() {
          return apelido;

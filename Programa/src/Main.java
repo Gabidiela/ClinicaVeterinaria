@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 	static ClinicaVet clinica;
 	static Scanner entrada;
-	 public static boolean validaAnimal = false;
+	public static boolean validaAnimal = false;
 
 	public static void main(String[] args) throws ParseException {
 		entrada = new Scanner(System.in);
@@ -23,47 +23,48 @@ public class Main {
 			System.out.println("* 3. Mostrar proximo Atendimento       *");
 			System.out.println("* 4. Consultas de carÃ¡ter estatÃ­stico  *");
 			System.out.println("* 0. Encerrar programa                 *");
-			System.out.println("****************************************");
+			System.out.println("****************************************\n");
 			int op = entrada.nextInt();
 			entrada.nextLine();
 
 			switch (op) {
 			case 1:
-				// ANIMAL ------------------------------------------------------
+				// CADASTRO DE ANIMAL
 				System.out.println("Informe os dados do animal");
 				System.out.print(" Digite o apelido do animalzinho: ");
 				String apelido = entrada.nextLine();
- // A clinica só trabalha com três tipo de animais , por isso precisamos validar
+
+				// A clinica só trabalha com três tipo de animais , por isso precisamos validar
 
 				String tipoAnimal;
-				
 				do {
-					System.out.print("Digite o tipo do animal (canino, felino ou roedor): ");
+					System.out.println("Digite o tipo do animal (canino, felino ou roedor): ");
 					tipoAnimal = entrada.nextLine();
+					// Chamada do método de validar o tipo de animal
 					isTipoAnimal(tipoAnimal);
 				} while (validaAnimal == false);
-
-				System.out.print("Dono: ");
+				// PROPRIETÁRIO DO ANIMALZINHO
+				System.out.println("Digite o nome do dono do(a) " + apelido);
 				String dono = entrada.nextLine();
 
-				System.out.print("Digite a data de nascimento (dd/mm/aaaa): ");
+				System.out.println("Digite a data de nascimento (dd/mm/aaaa): ");
 				Date dataNascimento = sdf.parse(entrada.next());
 
-				// -------------------------------------------------------------
-
-				Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono);
-
-				// SERVIÃ‡O ------------------------------------------
-				System.out.println("Selecione o serviÃ§o");
-				System.out.println("1. VacinaÃ§Ã£o");
-				System.out.println("2. CastraÃ§Ã£o");
+				// SERVIÇO ------------------------------------------
+				System.out.println("Selecione o serviço");
+				System.out.println("1. Vacinação");
+				System.out.println("2. Castração");
 				System.out.println("3. Check-up");
 				int numeroServico = entrada.nextInt();
 				entrada.nextLine();
 
 				System.out.print("O atendimento Ã© urgente? (S/N): ");
-				String atendimentoUrgente = entrada.nextLine();
-				entrada.nextLine();
+				char atendimentoUrgente = entrada.nextLine().charAt(0);
+
+				// ADD UM NOVO ANIMAL
+				Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono, numeroServico,
+						atendimentoUrgente);
+
 				// --------------------------------------------------
 
 				// FILA
@@ -76,7 +77,7 @@ public class Main {
 				 */
 				// ---------------------------------------------------------------------------------
 
-				System.out.println("Cadastro bem sucedido!");
+				System.out.println("Cadastro bem sucedido!\n "  );
 
 				break;
 			case 2:
@@ -131,14 +132,14 @@ public class Main {
 		entrada.close();
 	}
 
-	// Método que valida o tipo de animal 
+	// Método que valida o tipo de animal
 	public static boolean isTipoAnimal(String tipoAnimal) {
 
 		if (tipoAnimal.equals("canino") || tipoAnimal.equals("roedor") || tipoAnimal.equals("felino")) {
-			return  validaAnimal = true;
+			return validaAnimal = true;
 		} else {
 			System.err.println("O tipo de animal " + tipoAnimal + " é invalido" + "\n");
-			return  validaAnimal = false;
+			return validaAnimal = false;
 		}
 	}
 }
