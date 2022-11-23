@@ -1,13 +1,13 @@
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Date;
-//import java.util.Iterator;
+import java.util.Iterator;
 
 public class ClinicaVet {
   private Queue<Atendimento> filaPrioritaria;
   private Queue<Atendimento> filaNormal;
   private Queue<Atendimento> atendidos;
-  //private Iterator <Atendimento> it;
+  private Iterator <Atendimento> it;
 
   public ClinicaVet() {
     filaNormal = new LinkedList<Atendimento>();
