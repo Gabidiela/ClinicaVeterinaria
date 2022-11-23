@@ -115,24 +115,24 @@ public class Main {
           
 					switch (op2){
 					case 1:
-            System.out.println();
+                                                System.out.println();
 						System.out.println("Fila Prioritária: " + clinica.relAnimalFila1());
 						System.out.println("Fila Normal: " + clinica.relAnimalFila2());
-            System.out.println();
+                                                System.out.println();
 						break;
 					case 2:
-            System.out.println();
+                                                System.out.println();
 						System.out.println("Classificação por faixa etária");
 						System.out.println(clinica.relAnimalFaixaN());
-            System.out.println(clinica.relAnimalFaixaP());
-            System.out.println();
+                                                System.out.println(clinica.relAnimalFaixaP());
+                                                System.out.println();
 						break;
 					case 3:
-            System.out.println();
+                                                System.out.println();
 						System.out.println(clinica.relAnimalEsperaN());
 						System.out.println();
 						System.out.println(clinica.relAnimalEsperaP());
-            System.out.println();
+                                                System.out.println();
 						break;
 					case 4:
 						break;  
