@@ -14,15 +14,16 @@ public class Main {
     boolean sair = false;
 
     do {
-      System.out.println("***************** MENU *****************");
-      System.out.println("* O que deseja fazer?                  *");
-      System.out.println("* 1. Cadastrar novo animal             *");
-      System.out.println("* 2. Agendar Atendimento               *");
-      System.out.println("* 3. Realizar Atendimento              *");
-      System.out.println("* 4. Mostrar proximo Atendimento       *");
-      System.out.println("* 5. Consultas de caráter estatístico  *");
-      System.out.println("* 0. Encerrar programa                 *");
-      System.out.println("****************************************");
+      System.out.println("********************* MENU **********************");
+      System.out.println("* O que deseja fazer?                           *");
+      System.out.println("* 1. Cadastrar novo animal                      *");
+      System.out.println("* 2. Agendar Atendimento                        *");
+      System.out.println("* 3. Realizar Atendimento                       *");
+      System.out.println("* 4. Consultar proximo Atendimento              *");
+      System.out.println("* 5. Consultar proximo Atendimento por Fila     *");
+      System.out.println("* 6. Consultas de caráter estatístico           *");
+      System.out.println("* 0. Encerrar programa                          *");
+      System.out.println("*************************************************");
       int op = entrada.nextInt();
       entrada.nextLine();
 
@@ -101,14 +102,54 @@ public class Main {
           System.out.println("Cadastro bem sucedido!");
           break;
         case 3:
-          System.out.println("Por favor, compareça ao consultório:");
-          exibirAtendimento(clinica.chamaProximoAtendimento());
+          Atendimento atendimento = clinica.chamaProximoAtendimento();
+          if (atendimento == null) {
+            System.out.println("Não existem atendidos em espera!");
+          } else {
+            System.out.println("Por favor, compareça ao consultório o próximo a ser atendido:");
+            System.out.println("Senha: " + atendimento.getSenha());
+            System.out.println("animal: " + atendimento.getAnimal().getApelido());
+            System.out.println("Dono: " + atendimento.getAnimal().getDono());
+          }
           System.out.println("Atendimento realizado com sucesso");
           break;
         case 4:
-          exibirAtendimento(clinica.verProximoAtendimento());
+          System.out.println("Insira o apelido do animal:");
+          String nomeAnimal = entrada.nextLine();
+          System.out.println("Insira o nome do dono:");
+          String nomeDono = entrada.nextLine();
+
+          if(clinica.verificarProximoAtendimento(nomeAnimal,nomeDono)){
+            System.out.println("Este animal será o proximo a ser chamado");
+          }else{
+            System.out.println("Este animal não é o proximo a ser chamado");
+          }
           break;
-        /*case 5:
+        case 5:
+          System.out.println("Selecione a fila:");
+          System.out.println("1) Normal");
+          System.out.println("2) Prioritaria");
+          int fila = entrada.nextInt();
+          entrada.nextLine();
+          Atendimento proximoAtendimento = null;
+          switch (fila){
+            case 1:
+              proximoAtendimento = clinica.getProximoAtendimentoFilaNormal();
+              break;
+            case 2:
+              proximoAtendimento = clinica.getProximoAtendimentoFilaPrioritaria();
+              break;
+          }
+          if (proximoAtendimento == null) {
+            System.out.println("Não existem atendidos em espera!");
+          } else {
+            System.out.println("Próximo animal a ser atendido:");
+            System.out.println("Senha: " + proximoAtendimento.getSenha());
+            System.out.println("animal: " + proximoAtendimento.getAnimal().getApelido());
+            System.out.println("Dono: " + proximoAtendimento.getAnimal().getDono());
+          }
+          break;
+        /*case 6:
           System.out.println("***************************************************");
           System.out.println("* Selecione a opção desejada                      *");
           System.out.println("* 1. quantidade de animais em cada fila           *");
@@ -153,12 +194,6 @@ public class Main {
     int animalID = entrada.nextInt();
     return animais.get(animalID);
   }
-  public static void exibirAtendimento(Atendimento atendimento){
-    if (atendimento == null) {
-      System.out.println("Não existem atendidos em espera!");
-    } else {
-      System.out.println("Próximo a ser atendido animal: " + atendimento.getAnimal().getApelido() + " | Dono: " + atendimento.getAnimal().getDono());
-    }
-  }
+
 
 }

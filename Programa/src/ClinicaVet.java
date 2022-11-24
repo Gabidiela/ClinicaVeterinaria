@@ -25,26 +25,50 @@ public class ClinicaVet {
     }
 
     public Atendimento chamaProximoAtendimento() {
-        if(!filaPrioritaria.vazia())
-            return filaPrioritaria.chamarProximo();
-        else if(!filaNormal.vazia())
-            return filaNormal.chamarProximo();
-        else
+        Atendimento proximo;
+        if(!filaPrioritaria.vazia()) {
+            proximo = filaPrioritaria.chamarProximo();
+            atendidos.add(proximo);
+        }else if(!filaNormal.vazia()) {
+            proximo = filaNormal.chamarProximo();
+            atendidos.add(proximo);
+        }else{
             return null;
-
+        }
+    return proximo;
     }
 
     public Boolean verificaAnimal() {
         return null;
     }
 
-    public Atendimento verProximoAtendimento() {
+    public Atendimento getProximoAtendimento() {
         if(!filaPrioritaria.vazia())
            return filaPrioritaria.verProximo();
         else if(!filaNormal.vazia())
             return filaNormal.verProximo();
         else
             return null;
+    }
+    public Atendimento getProximoAtendimentoFilaPrioritaria() {
+        if(!filaPrioritaria.vazia())
+                return filaPrioritaria.verProximo();
+
+            return null;
+    }
+    public Atendimento getProximoAtendimentoFilaNormal() {
+        if(!filaNormal.vazia())
+            return filaNormal.verProximo();
+
+        return null;
+    }
+    public boolean verificarProximoAtendimento(String nomeAnimal, String nomeDono){
+        Animal proximoAnimal = getProximoAtendimento().getAnimal();
+        if (proximoAnimal.getApelido().equals(nomeAnimal) &&
+                proximoAnimal.getDono().equals(nomeDono)) {
+            return true;
+        }
+        return false;
     }
 
     public void relAnimalFila() {
