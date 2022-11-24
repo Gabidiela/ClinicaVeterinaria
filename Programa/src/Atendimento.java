@@ -40,4 +40,11 @@ public class Atendimento {
         HoraConsulta = new Date(System.currentTimeMillis());
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
 }

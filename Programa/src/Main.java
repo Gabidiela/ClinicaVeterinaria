@@ -1,17 +1,16 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
   static ClinicaVet clinica;
   static Scanner entrada;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     entrada = new Scanner(System.in);
     clinica = new ClinicaVet();
-
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     boolean sair = false;
 
     do {
@@ -34,9 +33,27 @@ public class Main {
           System.out.print("Apelido: ");
           String apelido = entrada.nextLine();
 
-          System.out.print("Tipo do animal (canino, felino ou roedor): ");
-         
-          String tipoAnimal = entrada.nextLine();
+          System.out.println("Tipo do animal: ");
+          System.out.println("1) canino ");
+          System.out.println("2) felino ");
+          System.out.println("3) roedor ");
+
+          int tipo =  entrada.nextInt();
+          entrada.nextLine();
+          String tipoAnimal ="";
+          switch (tipo){
+            case  1:
+              tipoAnimal = "canino";
+              break;
+            case  2:
+              tipoAnimal = "felino";
+              break;
+            case  3:
+              tipoAnimal = "roedor";
+              break;
+            default:
+              throw new Exception("tipo de animal inválido");
+          }
 
           System.out.print("Dono: ");
           String dono = entrada.nextLine();
@@ -46,7 +63,7 @@ public class Main {
 
           Date dataNascimento = null;
           try {
-            dataNascimento = sdf.parse(data);
+            dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(data);
           } catch (ParseException e) {
             e.printStackTrace();
           }
@@ -67,16 +84,16 @@ public class Main {
 
           switch (sel){
             case 1:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Vacinação",Prioritario: false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Vacinação", false));
               break;
             case 2:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Castração",Prioritario: false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Castração", false));
               break;
             case 3:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Check-up",Prioritario: false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Check-up",false));
               break;
             case 4:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Urgência",Prioritario: true));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Urgência", true));
               break;
             case 5:
               break;
@@ -84,24 +101,12 @@ public class Main {
           System.out.println("Cadastro bem sucedido!");
           break;
         case 3:
-          Animal animalAtendido = clinica.realizarAtendimento();
-
-          if (animalAtendido == null) {
-            System.out.println("A fila está vázia!");
-          } else {
-            System.out.println("Animal atendido: " + animalAtendido.getApelido() + " | Dono: " + animalAtendido.getDono());
-          }
-
+          System.out.println("Por favor, compareça ao consultório:");
+          exibirAtendimento(clinica.chamaProximoAtendimento());
+          System.out.println("Atendimento realizado com sucesso");
           break;
         case 4:
-          Animal proximoAnimal = clinica.mostrarProximo();
-
-          if (proximoAnimal == null) {
-            System.out.println("A fila está vázia!");
-          } else {
-            System.out.println("Próxmo animal: " + proximoAnimal.getApelido() + " | Dono: " + proximoAnimal.getDono());
-          }
-          
+          exibirAtendimento(clinica.verProximoAtendimento());
           break;
         /*case 5:
           System.out.println("***************************************************");
@@ -141,12 +146,19 @@ public class Main {
   }
   public static Animal selecionarAnimal(){
     List<Animal> animais = clinica.getAnimais();
-    System.out.println("Selecione o Animal que deseja realziar o procedimento:");
+    System.out.println("Selecione o Animal que para realizar o antendimento:");
     for(int i=0;i<animais.size();i++){
       System.out.println(i+") "+animais.get(i).getApelido()+" | "+animais.get(i).getDono());
     }
     int animalID = entrada.nextInt();
     return animais.get(animalID);
+  }
+  public static void exibirAtendimento(Atendimento atendimento){
+    if (atendimento == null) {
+      System.out.println("Não existem atendidos em espera!");
+    } else {
+      System.out.println("Próximo a ser atendido animal: " + atendimento.getAnimal().getApelido() + " | Dono: " + atendimento.getAnimal().getDono());
+    }
   }
 
 }

@@ -7,7 +7,7 @@ public class Animal {
     private String dono;
  
      public Animal( String apelido, String tipoAnimal, Date dataNascimento, String dono) {
-         this.Apelido = apelido;
+         this.apelido = apelido;
          this.tipoAnimal = tipoAnimal;
          this.dataNascimento = dataNascimento;
          this.dono = dono;

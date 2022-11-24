@@ -18,22 +18,33 @@ public class ClinicaVet {
 
     public void cadConsulta(Atendimento atendimento) {
         if (atendimento.isPrioritario()) {
-            FilaPrioritaria.Inserir(atendimento);
+            filaPrioritaria.inserir(atendimento);
         } else {
-            FilaNormal.Inserir(atendimento);
+            filaNormal.inserir(atendimento);
         }
     }
 
-    public Animal chamaProximo() {
-        return null;
+    public Atendimento chamaProximoAtendimento() {
+        if(!filaPrioritaria.vazia())
+            return filaPrioritaria.chamarProximo();
+        else if(!filaNormal.vazia())
+            return filaNormal.chamarProximo();
+        else
+            return null;
+
     }
 
     public Boolean verificaAnimal() {
         return null;
     }
 
-    public Animal fichaProxAnimal() {
-        return null;
+    public Atendimento verProximoAtendimento() {
+        if(!filaPrioritaria.vazia())
+           return filaPrioritaria.verProximo();
+        else if(!filaNormal.vazia())
+            return filaNormal.verProximo();
+        else
+            return null;
     }
 
     public void relAnimalFila() {

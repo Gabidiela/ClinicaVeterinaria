@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -10,16 +11,16 @@ public class Fila{
     public Fila(char tipoFila) {
         NumeroFila = 0;
         TipoFila = tipoFila;
-        Fila = new PriorityQueue<Atendimento>();
+        Fila = new LinkedList<Atendimento>();
     }
-    public void Inserir(Atendimento A){
+    public void inserir(Atendimento A){
         NumeroFila++;
         A.setSenha(TipoFila + "." + NumeroFila);
         Fila.add(A);
     }
 
-    public Atendimento ChamarProximo(){
-        if(Fila.size()>0) {
+    public Atendimento chamarProximo(){
+        if(!vazia()) {
             Atendimento proximo = Fila.remove();
             proximo.setHoraConsulta();
             return proximo;
@@ -27,8 +28,15 @@ public class Fila{
         return null;
     }
 
-    public Atendimento VerFila(){
-        return Fila.peek();
+    public Atendimento verProximo(){
+        if(!vazia()) {
+            return Fila.peek();
+        }
+        return null;
+    }
+
+    public boolean vazia(){
+        return Fila.isEmpty();
     }
 
 }
