@@ -18,9 +18,10 @@ public class Main {
       System.out.println("***************** MENU *****************");
       System.out.println("* O que deseja fazer?                  *");
       System.out.println("* 1. Cadastrar novo animal             *");
-      System.out.println("* 2. Realizar Atendimento              *");
-      System.out.println("* 3. Mostrar proximo Atendimento       *");
-      System.out.println("* 4. Consultas de caráter estatístico  *");
+      System.out.println("* 2. Agendar Atendimento               *");
+      System.out.println("* 3. Realizar Atendimento              *");
+      System.out.println("* 4. Mostrar proximo Atendimento       *");
+      System.out.println("* 5. Consultas de caráter estatístico  *");
       System.out.println("* 0. Encerrar programa                 *");
       System.out.println("****************************************");
       int op = entrada.nextInt();
@@ -52,32 +53,37 @@ public class Main {
           // -------------------------------------------------------------
 
           Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono);
-
-          // SERVIÇO ------------------------------------------
-          System.out.println("Selecione o serviço");
-          System.out.println("1. Vacinação");
-          System.out.println("2. Castração");
-          System.out.println("3. Check-up");
-          int numeroServico = entrada.nextInt();
-          entrada.nextLine();
-
-          System.out.print("O atendimento é urgente? (S/N): ");
-          String atendimentoUrgente = entrada.nextLine();
-          entrada.nextLine();
-          // --------------------------------------------------
-
-          // FILA ----------------------------------------------------------------------------
-          if (atendimentoUrgente.equalsIgnoreCase("S")) {
-            clinica.cadConsulta(new Atendimento(animal, numeroServico, true), "Prioritario");
-          } else {
-            clinica.cadConsulta(new Atendimento(animal, numeroServico, false), "Normal");
-          }
-          // ---------------------------------------------------------------------------------
-
-          System.out.println("Cadastro bem sucedido!");
-
+          System.out.println(clinica.cadastrarAnimal(animal));
           break;
         case 2:
+
+          System.out.println("Selecione o serviço");
+          System.out.println("1. Vacinar Animal");
+          System.out.println("2. Castrar Animal");
+          System.out.println("3. Check-up");
+          System.out.println("4. Atendimento de Urgência/Emergência");
+          System.out.println("5. Voltar");
+          int sel = entrada.nextInt();
+
+          switch (sel){
+            case 1:
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Vacinação",Prioritario: false));
+              break;
+            case 2:
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Castração",Prioritario: false));
+              break;
+            case 3:
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Check-up",Prioritario: false));
+              break;
+            case 4:
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Urgência",Prioritario: true));
+              break;
+            case 5:
+              break;
+          }
+          System.out.println("Cadastro bem sucedido!");
+          break;
+        case 3:
           Animal animalAtendido = clinica.realizarAtendimento();
 
           if (animalAtendido == null) {
@@ -87,7 +93,7 @@ public class Main {
           }
 
           break;
-        case 3:
+        case 4:
           Animal proximoAnimal = clinica.mostrarProximo();
 
           if (proximoAnimal == null) {
@@ -97,7 +103,7 @@ public class Main {
           }
           
           break;
-        /*case 4:
+        /*case 5:
           System.out.println("***************************************************");
           System.out.println("* Selecione a opção desejada                      *");
           System.out.println("* 1. quantidade de animais em cada fila           *");
@@ -133,4 +139,14 @@ public class Main {
 
     entrada.close();
   }
+  public static Animal selecionarAnimal(){
+    List<Animal> animais = clinica.getAnimais();
+    System.out.println("Selecione o Animal que deseja realziar o procedimento:");
+    for(int i=0;i<animais.size();i++){
+      System.out.println(i+") "+animais.get(i).getApelido()+" | "+animais.get(i).getDono());
+    }
+    int animalID = entrada.nextInt();
+    return animais.get(animalID);
+  }
+
 }
