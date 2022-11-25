@@ -39,7 +39,7 @@ public class Animal {
          dono = novoDono;
      }
      public void dados() {
-         System.out.println("O apelido do cachorro é:" + apelido );
+         System.out.println("O apelido do Animal é:" + apelido );
          System.out.println("o tipo do animal é:" + tipoAnimal);
          System.out.println("a data do nascimento é:" + dataNascimento);
          System.out.println("O dono do animal é:" + dono);

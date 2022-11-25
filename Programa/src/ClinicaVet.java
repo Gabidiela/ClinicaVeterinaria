@@ -136,7 +136,13 @@ public class ClinicaVet {
         }
     }
 
-    public void relPermanenciaMedia() {
+    public double relPermanenciaMedia() {
+        int totalAtendidos = atendidos.size();
+        double soma = 0;
+        for (int i = 0;i < totalAtendidos; i++ )
+            soma += atendidos.get(i).getPermanecia();
+
+        return (soma/totalAtendidos);
     }
 
     public boolean animalJaExiste(Animal animal) {

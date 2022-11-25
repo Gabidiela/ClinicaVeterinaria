@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Atendimento {
@@ -46,5 +48,14 @@ public class Atendimento {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
+    }
+
+    public double getPermanecia(){
+        Long permanece;
+        if (HoraConsulta == null)
+            permanece = (System.currentTimeMillis() - HoraEntrada.getTime());
+        else
+            permanece = (HoraConsulta.getTime()-HoraEntrada.getTime());
+        return (permanece.doubleValue() / 60000);
     }
 }

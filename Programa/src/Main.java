@@ -111,6 +111,7 @@ public class Main {
             System.out.println("Senha: " + atendimento.getSenha());
             System.out.println("animal: " + atendimento.getAnimal().getApelido());
             System.out.println("Dono: " + atendimento.getAnimal().getDono());
+            System.out.println("Tempo de permanência na fila: " + atendimento.getPermanecia()  + " minutos");
           }
           System.out.println("Atendimento realizado com sucesso");
           break;
@@ -146,8 +147,9 @@ public class Main {
           } else {
             System.out.println("Próximo animal a ser atendido:");
             System.out.println("Senha: " + proximoAtendimento.getSenha());
-            System.out.println("animal: " + proximoAtendimento.getAnimal().getApelido());
-            System.out.println("Dono: " + proximoAtendimento.getAnimal().getDono());
+            proximoAtendimento.getAnimal().dados();
+            System.out.println("Tempo de permanência na fila: " + proximoAtendimento.getPermanecia() + " minutos");
+
           }
           break;
         case 6:
@@ -165,7 +167,6 @@ public class Main {
               clinica.relAnimalFilaPrioritaria();
               System.out.println("Fila Normal: ");
               clinica.relAnimalFilaNormal();
-
               break;
             case 2:
               System.out.println("Classificação por faixa etária");
@@ -177,6 +178,7 @@ public class Main {
               clinica.relAnimalEspera();
               break;
             case 4:
+              System.out.println("O tempo médio de permanência na fila foi de: "+ clinica.relPermanenciaMedia());
               break;
 
           }
