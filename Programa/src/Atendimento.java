@@ -1,22 +1,20 @@
 import java.util.Date;
 
 public class Atendimento {
-
     // Variáveis
     private Animal animal;
     private String senha;
-    private Date HoraEntrada;
-    private Date HoraConsulta;
-    private String NomeServico;
-    private boolean Prioritario;
-
+    private Date horaEntrada;
+    private Date horaConsulta; // *** Faltando atualizar a variável de consulta. Na hora que chamar o animal, atualiza ela
+    private String nomeServico;
+    private boolean prioritario;
 
     // construtor
     public Atendimento(Animal animal, String NomeServico, boolean Prioritario) {
         this.animal = animal;
-        this.NomeServico = NomeServico;
-        this.Prioritario = Prioritario;
-        HoraEntrada = new Date(System.currentTimeMillis());
+        this.nomeServico = NomeServico;
+        this.prioritario = Prioritario;
+        horaEntrada = new Date(System.currentTimeMillis());
     }
 
     // get e set
@@ -29,15 +27,23 @@ public class Atendimento {
     }
 
     public String getNomeServico(){
-        return NomeServico;
+        return nomeServico;
     }
 
     public Boolean isPrioritario(){
-        return Prioritario;
+        return prioritario;
     }
 
     public void setHoraConsulta(){
-        HoraConsulta = new Date(System.currentTimeMillis());
+        horaConsulta = new Date(System.currentTimeMillis());
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public long getTempoEspera() {
+        long tempoEspera = horaConsulta.getTime() - horaEntrada.getTime();
+        return tempoEspera; // *** Falta converter pra s,m,h !!! NÃO É AQUI QUE FAZ
+    }
 }
