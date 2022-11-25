@@ -10,7 +10,7 @@ public class Animal {
     
  
      public Animal( String apelido, String tipoAnimal, Date dataNascimento, String dono, 
-    		 int numeroServico,char atendimentoUrgente) {
+int numeroServico, char atendimentoUrgente) {
          this.apelido = apelido;
          this.tipoAnimal = tipoAnimal;
          this.dataNascimento = dataNascimento;
@@ -49,4 +49,3 @@ public class Animal {
          System.out.println("O dono do animal é:" + dono);
      }
 }
-
