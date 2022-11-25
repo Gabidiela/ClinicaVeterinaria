@@ -70,7 +70,6 @@ public class Main {
             e.printStackTrace();
           }
           // -------------------------------------------------------------
-
           Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono);
           System.out.println(clinica.cadastrarAnimal(animal));
           break;
@@ -169,9 +168,7 @@ public class Main {
               clinica.relAnimalFilaNormal();
               break;
             case 2:
-              System.out.println("Classificação por faixa etária");
-              clinica.relAnimalFaixa();
-
+              System.out.println("Classificação por faixa etária" + clinica.relAnimalFaixa());
               break;
             case 3:
               System.out.println("Classificação por serviço ");

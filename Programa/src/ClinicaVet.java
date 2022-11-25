@@ -99,8 +99,8 @@ public class ClinicaVet {
         faixaAnimal.incrementar(separaAnimalPorFaixa(filaNormal.getFilaIterator()));
         faixaAnimal.incrementar(separaAnimalPorFaixa(atendidos.iterator()));
 
-        return String.format("------ Fila Prioritária ------%n") +
-                String.format("a) até 2 anos de idade %d%n", faixaAnimal.crianca) +
+        return String.format("\n --------- Faixas ------------- ") +
+                String.format("\na) até 2 anos de idade %d%n", faixaAnimal.crianca) +
                 String.format("b) entre 2 e 5 anos de idade %d%n", faixaAnimal.adulto) +
                 String.format("c) mais de 5 anos de idade %d%n", faixaAnimal.idoso) +
                 String.format("-------------------------------");
