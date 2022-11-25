@@ -14,6 +14,7 @@ public class Main {
     boolean sair = false;
 
     do {
+      try{
       System.out.println("********************* MENU **********************");
       System.out.println("* O que deseja fazer?                           *");
       System.out.println("* 1. Cadastrar novo animal                      *");
@@ -39,17 +40,17 @@ public class Main {
           System.out.println("2) felino ");
           System.out.println("3) roedor ");
 
-          int tipo =  entrada.nextInt();
+          int tipo = entrada.nextInt();
           entrada.nextLine();
-          String tipoAnimal ="";
-          switch (tipo){
-            case  1:
+          String tipoAnimal = "";
+          switch (tipo) {
+            case 1:
               tipoAnimal = "canino";
               break;
-            case  2:
+            case 2:
               tipoAnimal = "felino";
               break;
-            case  3:
+            case 3:
               tipoAnimal = "roedor";
               break;
             default:
@@ -83,18 +84,18 @@ public class Main {
           System.out.println("5. Voltar");
           int sel = entrada.nextInt();
 
-          switch (sel){
+          switch (sel) {
             case 1:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Vacinação", false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(), "Vacinação", false));
               break;
             case 2:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Castração", false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(), "Castração", false));
               break;
             case 3:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Check-up",false));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(), "Check-up", false));
               break;
             case 4:
-              clinica.cadConsulta(new Atendimento(selecionarAnimal(),"Urgência", true));
+              clinica.cadConsulta(new Atendimento(selecionarAnimal(), "Urgência", true));
               break;
             case 5:
               break;
@@ -104,7 +105,7 @@ public class Main {
         case 3:
           Atendimento atendimento = clinica.chamaProximoAtendimento();
           if (atendimento == null) {
-            System.out.println("Não existem atendidos em espera!");
+            System.out.println("Não existem animais em espera!");
           } else {
             System.out.println("Por favor, compareça ao consultório o próximo a ser atendido:");
             System.out.println("Senha: " + atendimento.getSenha());
@@ -119,9 +120,9 @@ public class Main {
           System.out.println("Insira o nome do dono:");
           String nomeDono = entrada.nextLine();
 
-          if(clinica.verificarProximoAtendimento(nomeAnimal,nomeDono)){
+          if (clinica.verificarProximoAtendimento(nomeAnimal, nomeDono)) {
             System.out.println("Este animal será o proximo a ser chamado");
-          }else{
+          } else {
             System.out.println("Este animal não é o proximo a ser chamado");
           }
           break;
@@ -132,7 +133,7 @@ public class Main {
           int fila = entrada.nextInt();
           entrada.nextLine();
           Atendimento proximoAtendimento = null;
-          switch (fila){
+          switch (fila) {
             case 1:
               proximoAtendimento = clinica.getProximoAtendimentoFilaNormal();
               break;
@@ -149,7 +150,7 @@ public class Main {
             System.out.println("Dono: " + proximoAtendimento.getAnimal().getDono());
           }
           break;
-        /*case 6:
+        case 6:
           System.out.println("***************************************************");
           System.out.println("* Selecione a opção desejada                      *");
           System.out.println("* 1. quantidade de animais em cada fila           *");
@@ -158,29 +159,37 @@ public class Main {
           System.out.println("* 4. tempo médio de permanência na fila           *");
           System.out.println("***************************************************");
           int op2 = entrada.nextInt();
-          switch (op2){
+          switch (op2) {
             case 1:
-              System.out.println("Fila Prioritária: " + clinica.relAnimalFila1());
-              System.out.println("Fila Normal: " + clinica.relAnimalFila2());
-            
+              System.out.println("Fila Prioritária: ");
+              clinica.relAnimalFilaPrioritaria();
+              System.out.println("Fila Normal: ");
+              clinica.relAnimalFilaNormal();
+
               break;
             case 2:
               System.out.println("Classificação por faixa etária");
               clinica.relAnimalFaixa();
-              
+
               break;
             case 3:
+              System.out.println("Classificação por serviço ");
+              clinica.relAnimalEspera();
               break;
             case 4:
               break;
-              
+
           }
-          break;*/
+          break;
         case 0:
           System.out.println("O programa será encerrado. Até logo!");
           sair = true;
           break;
       }
+    }catch(Exception e){
+      System.out.println("Entrada invalda, tente novamente");
+        entrada.nextLine();
+    }
     } while (!sair);
 
     entrada.close();

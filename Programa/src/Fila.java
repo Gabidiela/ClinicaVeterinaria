@@ -1,5 +1,5 @@
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Fila{
@@ -39,4 +39,11 @@ public class Fila{
         return Fila.isEmpty();
     }
 
+    public int tamFila() {
+        return Fila.size();
+    }
+
+    public Iterator<Atendimento> getFilaIterator() {
+        return Fila.iterator();
+    }
 }

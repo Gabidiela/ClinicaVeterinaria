@@ -11,6 +11,8 @@ public class Animal {
          this.tipoAnimal = tipoAnimal;
          this.dataNascimento = dataNascimento;
          this.dono = dono;
+
+
      }
      public String getApelido() {
          return apelido;

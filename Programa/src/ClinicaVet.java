@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class ClinicaVet {
     private Fila filaNormal;
@@ -38,10 +35,6 @@ public class ClinicaVet {
     return proximo;
     }
 
-    public Boolean verificaAnimal() {
-        return null;
-    }
-
     public Atendimento getProximoAtendimento() {
         if(!filaPrioritaria.vazia())
            return filaPrioritaria.verProximo();
@@ -71,13 +64,76 @@ public class ClinicaVet {
         return false;
     }
 
-    public void relAnimalFila() {
+    public void relAnimalFilaPrioritaria() {
+        if(!filaPrioritaria.vazia())
+            System.out.println("Há " + filaPrioritaria.tamFila() + " animal(is) na fila");
     }
 
-    public void relAnimalFaixa() {
+    public void relAnimalFilaNormal() {
+        if(!filaNormal.vazia())
+            System.out.println("Há " + filaNormal.tamFila() + " animal(is) na fila");
+    }
+
+    public AnimalPorFaixa separaAnimalPorFaixa(Iterator<Atendimento> atendimentoIterator){
+        Date agora = new Date(System.currentTimeMillis());
+        int crianca = 0, adulto = 0, idoso = 0;
+
+        while (atendimentoIterator.hasNext()){
+            Atendimento atendimento = atendimentoIterator.next();
+            int idade = new Date(agora.getTime()-atendimento.getAnimal().getDataNascimento().getTime()).getYear();
+
+            if (idade <= 2){
+                crianca++;
+            } else if(idade >2 && idade <=5) {
+                adulto++;
+            } else {
+                idoso++;
+            }
+        }
+        return new AnimalPorFaixa(crianca, adulto, idoso);
+    }
+
+    public String relAnimalFaixa() {
+        AnimalPorFaixa faixaAnimal = new AnimalPorFaixa(0, 0, 0);
+        faixaAnimal.incrementar(separaAnimalPorFaixa(filaPrioritaria.getFilaIterator()));
+        faixaAnimal.incrementar(separaAnimalPorFaixa(filaNormal.getFilaIterator()));
+        faixaAnimal.incrementar(separaAnimalPorFaixa(atendidos.iterator()));
+
+        return String.format("------ Fila Prioritária ------%n") +
+                String.format("a) até 2 anos de idade %d%n", faixaAnimal.crianca) +
+                String.format("b) entre 2 e 5 anos de idade %d%n", faixaAnimal.adulto) +
+                String.format("c) mais de 5 anos de idade %d%n", faixaAnimal.idoso) +
+                String.format("-------------------------------");
     }
 
     public void relAnimalEspera() {
+        if (!filaNormal.vazia()){
+            Iterator<Atendimento> atendimento = filaNormal.getFilaIterator();
+            int vacinados = 0;
+            int castrados = 0;
+            int checados = 0;
+            int urgencia = filaPrioritaria.tamFila();
+
+            while(atendimento.hasNext()) {
+                switch (atendimento.next().getNomeServico()){
+                    case "Vacinação":
+                        vacinados++;
+                        break;
+                    case "Castração":
+                        castrados++;
+                        break;
+                    case "Check-up":
+                        checados++;
+                        break;
+                }
+            }
+            System.out.println("Relatório de animais a serem  atendidos filtrado por serviços");
+            System.out.println("Vacinação: " + vacinados + " animais");
+            System.out.println("Castração: " + castrados + " animais");
+            System.out.println("Check-up: " + checados + " animais");
+            System.out.println("Urgência/emergência: " + urgencia + " animais");
+
+        }
     }
 
     public void relPermanenciaMedia() {
