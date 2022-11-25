@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     static ClinicaVet clinica;
     static Scanner entrada;
-    public static boolean validaAnimal = false;
+    // public static boolean validaAnimal = false;
 
     public static void main(String[] args) throws ParseException {
         entrada = new Scanner(System.in);
@@ -37,13 +37,39 @@ public class Main {
 
                     // A clinica só trabalha com três tipo de animais , por isso precisamos validar
 
-                    String tipoAnimal;
-                    do {
-                        System.out.println("Digite o tipo do animal (canino, felino ou roedor): ");
-                        tipoAnimal = entrada.nextLine();
-                        // Chamada do método de validar o tipo de animal
-                        isTipoAnimal(tipoAnimal);
-                    } while (validaAnimal == false);
+                    /*
+                     * String tipoAnimal;
+                     * do {
+                     * System.out.println("Digite o tipo do animal (canino, felino ou roedor): ");
+                     * tipoAnimal = entrada.nextLine();
+                     * // Chamada do método de validar o tipo de animal
+                     * isTipoAnimal(tipoAnimal);
+                     * } while (validaAnimal == false);
+                     */
+
+                    System.out.println("Tipo do animal: ");
+                    System.out.println("1) canino ");
+                    System.out.println("2) felino ");
+                    System.out.println("3) roedor ");
+
+                    int tipo = entrada.nextInt();
+                    entrada.nextLine();
+                    String tipoAnimal = "";
+                    switch (tipo) {
+                        case 1:
+                            tipoAnimal = "canino";
+                            break;
+                        case 2:
+                            tipoAnimal = "felino";
+                            break;
+                        case 3:
+                            tipoAnimal = "roedor";
+                            break;
+                        default:
+                            // throw new Exception("tipo de animal inválido");
+                            System.err.println("O tipo de animal " + tipoAnimal + " é invalido" + "\n");
+                    }
+
                     // PROPRIETÁRIO DO ANIMALZINHO
                     System.out.println("Digite o nome do dono do(a) " + apelido);
                     String dono = entrada.nextLine();
@@ -63,7 +89,7 @@ public class Main {
                     char atendimentoUrgente = entrada.nextLine().charAt(0);
 
                     String nomeServico = "";
-                    switch(numeroServico) {
+                    switch (numeroServico) {
                         case 1:
                             nomeServico = "Vacinação";
                             break;
@@ -76,7 +102,8 @@ public class Main {
                     }
 
                     // ADD UM NOVO ANIMAL
-                    Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono, numeroServico, atendimentoUrgente);
+                    Animal animal = new Animal(apelido, tipoAnimal, dataNascimento, dono, numeroServico,
+                            atendimentoUrgente);
 
                     if (atendimentoUrgente == 'S' || atendimentoUrgente == 's') {
                         clinica.cadConsulta(new Atendimento(animal, nomeServico, true), "Prioritario");
@@ -155,13 +182,16 @@ public class Main {
     }
 
     // Método que valida o tipo de animal
-    public static boolean isTipoAnimal(String tipoAnimal) {
-
-        if (tipoAnimal.equals("canino") || tipoAnimal.equals("roedor") || tipoAnimal.equals("felino")) {
-            return validaAnimal = true;
-        } else {
-            System.err.println("O tipo de animal " + tipoAnimal + " é invalido" + "\n");
-            return validaAnimal = false;
-        }
-    }
+    /*
+     * public static boolean isTipoAnimal(String tipoAnimal) {
+     * 
+     * if (tipoAnimal.equals("canino") || tipoAnimal.equals("roedor") ||
+     * tipoAnimal.equals("felino")) {
+     * return validaAnimal = true;
+     * } else {
+     * System.err.println("O tipo de animal " + tipoAnimal + " é invalido" + "\n");
+     * return validaAnimal = false;
+     * }
+     * }
+     */
 }
