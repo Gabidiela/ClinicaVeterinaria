@@ -140,9 +140,10 @@ public class ClinicaVet {
         int totalAtendidos = atendidos.size();
         double soma = 0;
         for (int i = 0;i < totalAtendidos; i++ )
-            soma += atendidos.get(i).getPermanecia();
+            soma +=  atendidos.get(i).getPermanecia();
 
-        return (soma/totalAtendidos);
+        double media = (soma/totalAtendidos);
+        return media;
     }
 
     public boolean animalJaExiste(Animal animal) {
@@ -167,5 +168,9 @@ public class ClinicaVet {
 
     public List<Animal> getAnimais() {
         return animais;
+    }
+
+    public boolean temAnimais(){
+        return animais.size()>0;
     }
 }
