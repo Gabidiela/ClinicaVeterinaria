@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Atendimento {
+public class Atendimento implements Serializable {
 
     // Variáveis
     private Animal animal;

@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Fila{
+public class Fila implements Serializable {
     private int NumeroFila;
     private char TipoFila;
 

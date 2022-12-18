@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.io.*;
 import java.util.*;
 
 public class ClinicaVet {
@@ -7,10 +9,13 @@ public class ClinicaVet {
     private List<Animal> animais;
 
     public ClinicaVet() {
-        filaNormal = new Fila('N');
-        filaPrioritaria = new Fila('P');
-        atendidos = new ArrayList<Atendimento>();
-        animais = new ArrayList<Animal>();
+        boolean conseguiuLerArquivo = this.lerArquivo();
+        if (!conseguiuLerArquivo) {
+            filaNormal = new Fila('N');
+            filaPrioritaria = new Fila('P');
+            atendidos = new ArrayList<Atendimento>();
+            animais = new ArrayList<Animal>();
+        }
     }
 
     public void cadConsulta(Atendimento atendimento) {
@@ -19,6 +24,7 @@ public class ClinicaVet {
         } else {
             filaNormal.inserir(atendimento);
         }
+        salvaArquivo();
     }
 
     public Atendimento chamaProximoAtendimento() {
@@ -32,7 +38,8 @@ public class ClinicaVet {
         }else{
             return null;
         }
-    return proximo;
+        salvaArquivo();
+        return proximo;
     }
 
     public Atendimento getProximoAtendimento() {
@@ -163,6 +170,7 @@ public class ClinicaVet {
         }
 
         animais.add(animal);
+        salvaArquivo();
         return "Animal cadastrado com sucesso";
     }
 
@@ -172,5 +180,53 @@ public class ClinicaVet {
 
     public boolean temAnimais(){
         return animais.size()>0;
+    }
+
+    public boolean lerArquivo(){
+        try {
+            File input = new File("database.txt");
+            if (!input.exists()) {
+                return false;
+            }
+            FileInputStream fis = new FileInputStream(input);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Database db = (Database)ois.readObject();
+
+            ois.close();
+            fis.close();
+            if (db == null) {
+                return false;
+            }
+            this.filaNormal = db.filaNormal;
+            this.filaPrioritaria = db.filaPrioritaria;
+            this.atendidos = db.atendidos;
+            this.animais = db.animais;
+        } catch (Exception e) {
+            System.out.println(e);
+            // INSERIR ALERTA DE ERRO
+            return false;
+        }
+        return true;
+    }
+
+    public boolean salvaArquivo(){
+        try {
+            File output = new File("database.txt");
+            if (!output.exists()) {
+                output.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(output);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(new Database(filaNormal, filaPrioritaria,atendidos,animais));
+            oos.flush();
+            oos.close();
+            fos.close();
+
+        } catch (Exception e) {
+            //INSERIR ALERTA DE ERRO
+            System.out.println(e);
+            return false;
+        }
+        return true;
     }
 }

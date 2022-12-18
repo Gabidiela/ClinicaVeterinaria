@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class Animal {
+public class Animal implements Serializable {
     private String apelido;
     private String tipoAnimal;
     private Date dataNascimento;
