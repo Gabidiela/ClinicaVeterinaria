@@ -1,4 +1,5 @@
-# 🐾ClinicaVeterinaria
+![Logomarca ](./logomarca.png)
+ ## 💻Como rodar esse Projeto
 Projeto que simula um sistema de ordenação de filas em uma clinica veterinária.
 
 ## 💻Tecnologias Utilizadas
