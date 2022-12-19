@@ -71,14 +71,12 @@ public class ClinicaVet {
         return false;
     }
 
-    public void relAnimalFilaPrioritaria() {
-        if(!filaPrioritaria.vazia())
-            System.out.println("Há " + filaPrioritaria.tamFila() + " animal(is) na fila");
+    public String relAnimalFilaPrioritaria() {
+            return ("Há " + filaPrioritaria.tamFila() + " animal(is) na fila");
     }
 
-    public void relAnimalFilaNormal() {
-        if(!filaNormal.vazia())
-            System.out.println("Há " + filaNormal.tamFila() + " animal(is) na fila");
+    public String relAnimalFilaNormal() {
+        return ("Há " + filaNormal.tamFila() + " animal(is) na fila");
     }
 
     public AnimalPorFaixa separaAnimalPorFaixa(Iterator<Atendimento> atendimentoIterator){
@@ -109,12 +107,14 @@ public class ClinicaVet {
         return String.format("\n --------- Faixas ------------- ") +
                 String.format("\na) até 2 anos de idade %d%n", faixaAnimal.crianca) +
                 String.format("b) entre 2 e 5 anos de idade %d%n", faixaAnimal.adulto) +
-                String.format("c) mais de 5 anos de idade %d%n", faixaAnimal.idoso) +
-                String.format("-------------------------------");
+                String.format("c) mais de 5 anos de idade %d%n", faixaAnimal.idoso) ;
     }
 
-    public void relAnimalEspera() {
-        if (!filaNormal.vazia()){
+    public String relAnimalEspera() {
+
+        if (filaNormal.vazia() && filaPrioritaria.vazia()){
+        return "Não existem animais em espera";
+        }
             Iterator<Atendimento> atendimento = filaNormal.getFilaIterator();
             int vacinados = 0;
             int castrados = 0;
@@ -134,23 +134,24 @@ public class ClinicaVet {
                         break;
                 }
             }
-            System.out.println("Relatório de animais a serem  atendidos filtrado por serviços");
-            System.out.println("Vacinação: " + vacinados + " animais");
-            System.out.println("Castração: " + castrados + " animais");
-            System.out.println("Check-up: " + checados + " animais");
-            System.out.println("Urgência/emergência: " + urgencia + " animais");
+return "Relatório de animais a serem  atendidos filtrado por serviços\n"
+        +"Vacinação: " + vacinados + " animais\n"
+        +"Castração: " + castrados + " animais\n"
+        +"Check-up: " + checados + " animais\n"
+        +"Urgência/emergência: " + urgencia + " animais\n";
 
-        }
+
     }
 
-    public double relPermanenciaMedia() {
+    public String relPermanenciaMedia() {
         int totalAtendidos = atendidos.size();
         double soma = 0;
         for (int i = 0;i < totalAtendidos; i++ )
-            soma +=  atendidos.get(i).getPermanecia();
+            soma +=  atendidos.get(i).getPermaneciaDouble();
 
         double media = (soma/totalAtendidos);
-        return media;
+        double segundos = media%1 *60;
+        return ((int)(media-media%1))+" minutos e " +(segundos - segundos%0.1)+" segundos";
     }
 
     public boolean animalJaExiste(Animal animal) {

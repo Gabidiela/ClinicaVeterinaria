@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Animal implements Serializable {
@@ -39,11 +40,13 @@ public class Animal implements Serializable {
      public void setDono(String novoDono) {
          dono = novoDono;
      }
-     public void dados() {
-         System.out.println("O apelido do Animal é:" + apelido );
-         System.out.println("o tipo do animal é:" + tipoAnimal);
-         System.out.println("a data do nascimento é:" + dataNascimento);
-         System.out.println("O dono do animal é:" + dono);
+     public String dados() {
+         String pattern = "dd/MM/yyyy";
+         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+         return "O apelido do Animal é: " + apelido +"\n"
+                 +"o tipo do animal é: " + tipoAnimal+"\n"
+                 +"a data do nascimento é: " + sdf.format(dataNascimento)+"\n"
+                 +"O dono do animal é: " + dono+"\n";
      }
 }
 

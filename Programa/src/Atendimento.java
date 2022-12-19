@@ -51,7 +51,18 @@ public class Atendimento implements Serializable {
         this.animal = animal;
     }
 
-    public double getPermanecia(){
+    public String getPermanecia(){
+        Long permanece;
+        if (HoraConsulta == null)
+            permanece = (System.currentTimeMillis() - HoraEntrada.getTime());
+        else
+            permanece = (HoraConsulta.getTime()-HoraEntrada.getTime());
+
+        double minutos = (permanece.doubleValue() / 60000);
+        double segundos = minutos%1 *60;
+        return ((int)(minutos-minutos%1))+" minutos e " +(segundos - segundos%0.1)+" segundos";
+    }
+    public double getPermaneciaDouble(){
         Long permanece;
         if (HoraConsulta == null)
             permanece = (System.currentTimeMillis() - HoraEntrada.getTime());
